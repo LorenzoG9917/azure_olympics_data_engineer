@@ -1,0 +1,118 @@
+--- Ejecutar este archivo dese un Script SQL en Synapse Analytics.
+--- Use olympics_db
+USE olympics_db;
+GO
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'Y*********0'
+
+-- Create credentials
+CREATE DATABASE SCOPED CREDENTIAL SasCredentialDemo
+WITH IDENTITY = 'SHARED ACCESS SIGNATURE', 
+SECRET = '[SASKeyGenerado]'
+GO
+
+-- Create format
+CREATE EXTERNAL FILE FORMAT CSV
+WITH (FORMAT_TYPE = DELIMITEDTEXT,
+      FORMAT_OPTIONS(
+          FIELD_TERMINATOR = ',',
+          USE_TYPE_DEFAULT = True,
+          FIRST_ROW=2)
+);
+GO
+
+-- Creanos un external data
+CREATE EXTERNAL DATA SOURCE olympicsdatalg17 WITH (
+    LOCATION = 'https://tokyoolympicdatalg.dfs.core.windows.net/', CREDENTIAL = SasCredentialDemo
+);
+GO
+
+
+--Create table athletes
+CREATE EXTERNAL TABLE athletes (
+    PersonName VARCHAR(75),
+    Country VARCHAR(75),
+    Discipline VARCHAR(75)  
+)
+with (
+LOCATION = 'tokyo-olympic-data/transformed-data/athletes',
+DATA_SOURCE = olympicsdatalg17,
+FILE_FORMAT = CSV
+)
+GO
+
+
+--Create table coaches
+CREATE EXTERNAL TABLE coaches(
+    Name VARCHAR(75),
+    Country VARCHAR(75),
+    Discipline VARCHAR(75),
+    Event VARCHAR(75) -- Adjust the length as needed
+)
+with (
+LOCATION = 'tokyo-olympic-data/transformed-data/coaches',
+DATA_SOURCE = olympicsdatalg17,
+FILE_FORMAT = CSV
+)
+GO
+
+
+--Create table entries_gender
+
+CREATE EXTERNAL TABLE entries_gender(
+    Discipline VARCHAR(75),
+    Female INT,
+    Male INT,
+    Total INT
+)
+with (
+LOCATION = 'tokyo-olympic-data/transformed-data/entriesgender',
+DATA_SOURCE = olympicsdatalg17,
+FILE_FORMAT = CSV
+)
+GO
+
+
+--Create table medals
+
+CREATE EXTERNAL TABLE medals(
+    Ranking INT,
+    TeamCountry VARCHAR(100),
+    Gold INT,
+    Silver INT,
+    Bronze INT,
+    Total INT,
+    RankTotal INT
+)
+with (
+LOCATION = 'tokyo-olympic-data/transformed-data/medals',
+DATA_SOURCE = olympicsdatalg17,
+FILE_FORMAT = CSV
+)
+GO
+
+--Create table teams
+
+CREATE EXTERNAL TABLE teams(
+    TeamName VARCHAR(75),
+    Discipline VARCHAR(75),
+    Country VARCHAR(75),
+    Event VARCHAR(75) -- Adjust the length as needed
+)
+with (
+LOCATION = 'tokyo-olympic-data/transformed-data/teams',
+DATA_SOURCE = olympicsdatalg17,
+FILE_FORMAT = CSV
+)
+GO
+
+
+
+
+-- Si tienes problemas al crear tu información puedes eliminarla y volverla a crear.
+--DROP EXTERNAL FILE FORMAT CSV
+
+--DROP DATABASE SCOPED CREDENTIAL SasCredential10
+
+--DROP EXTERNAL DATA SOURCE olympics_data_lg
+
+--DROP EXTERNAL TABLE dbo.medals
