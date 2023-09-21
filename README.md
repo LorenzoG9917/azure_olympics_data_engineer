@@ -88,7 +88,7 @@ extra_configs = configs)
 ### Paso 13: Asignar roles de Storage Contributor
 - Asigna el rol de "Storage Contributor" a la aplicación "app01" que creaste en tu grupo de recursos. Esto garantiza que tenga los permisos necesarios para acceder y modificar los datos en Data Lake Gen2.
 
-### Paso 14 Ejecutar el Notebook de Transformación: 
+### Paso 14: Ejecutar el Notebook de Transformación: 
 - Ejecuta el notebook en Azure Databricks donde realizas las transformaciones necesarias en los datos. Esto puede incluir cambios en el tipo de dato, limpieza y procesamiento adicional.
 - Una vez que hayas completado las transformaciones, el código carga los datos resultantes en la carpeta "transformed-data" en tu Data Lake Gen2.
 
@@ -101,7 +101,7 @@ extra_configs = configs)
 - Necesitamos hacer un puente entre Synapse y Data Lake Gen 2, por ende debemos generar un SAS el cual permita acceder al data lake y a todos sus recursos.
 - Tener en cuenta que este SAS(Key) dura por defecto 8 horas por ende debe modificarse según su necesidad.
 
-### Paso 16 : Crear tablas externas en base de datos "olympics-db"
+### Paso 17: Crear tablas externas en base de datos "olympics-db"
 - Para crear las tablas externas debemos antes realizar una serie de pasos (Crear  external data source y Crear formato)
 - Data source se refiere a de donde proviene nuestra data en nuestro caso es la capa transformed-data ubicada en el Data Lake Gen2.
 - Para crear el data source debemos crear un scope que nos permita acceder a nuestro Data Lake Gen2, el scope necesita el SAS creado en el paso anterior.
@@ -147,16 +147,17 @@ FILE_FORMAT = CSV
 )
 GO
 ```
-### Paso 17: Conexión de Power BI Desktop a Synapse SQL Pool Serverless "olympics-db"
+### Paso 18: Conexión de Power BI Desktop a Synapse SQL Pool Serverless "olympics-db"
 - Incializar el Power BI Desktop
 - Seleccionar la opción obtener datos (Azure)
 - Nos solicita poner la dirección del servidor y el puerto, en nuestro caso usaremos el Serverless SQL endpoint el cual podemos encontrar en la sección de propiedades de nuestro Synapse.
 - Ejemplo de Serverless SQL endpoint: synapse-name-ondemand.sql.azuresynapse.net
 - Posterior nos logeamos con el user y password creados en el paso 15.
 
-### Paso 18: Crear dashboard final
+### Paso 19: Crear dashboard final
 - Crea un dashboard final que presente los datos de manera efectiva y genere los informes necesarios basados en tus datos transformados.
 - Añade gráficos, tablas y filtros según sea necesario para crear un informe completo.
+![dashboard](https://github.com/LorenzoG9917/azure_olympics_data_engineer/assets/121797266/d66e049b-0d85-463a-a925-cb5b48d3898c)
 
 ## Agradecimientos
 
@@ -164,7 +165,6 @@ GO
 
 
 ## Autor
-
 Este repositorio ha sido personalizado y adaptado por [Lorenzo Guerrero](https://www.linkedin.com/feed/) con fines educativos.
 
 
