@@ -159,13 +159,8 @@ GO
 - Añade gráficos, tablas y filtros según sea necesario para crear un informe completo.
 ![dashboard](https://github.com/LorenzoG9917/azure_olympics_data_engineer/assets/121797266/d66e049b-0d85-463a-a925-cb5b48d3898c)
 
-## Agradecimientos
-
-- Agradecimientos especiales a [Darshil Parmar](https://www.linkedin.com/in/darshil-parmar/) por la creación de este proyecto con fines educativos.
-
-
 ## Autor
-Este repositorio ha sido personalizado y adaptado por [Lorenzo Guerrero](https://www.linkedin.com/feed/) con fines educativos.
+Este repositorio ha sido personalizado y adaptado por [Lorenzo Guerrero](https://www.linkedin.com/feed/).
 
 
 
